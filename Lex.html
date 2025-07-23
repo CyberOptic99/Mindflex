@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindFlex with Lex - Ultimate Brain Training Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+        }
+        
+        .glow-green {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .glow-purple {
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+        }
+        
+        .glow-blue {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .text-glow-green {
+            text-shadow: 0 0 15px rgba(34, 197, 94, 0.8);
+        }
+        
+        .text-glow-purple {
+            text-shadow: 0 0 15px rgba(147, 51, 234, 0.8);
+        }
+        
+        .text-glow-blue {
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 30px rgba(34, 197, 94, 0.4); }
+            to { box-shadow: 0 0 50px rgba(34, 197, 94, 0.8); }
+        }
+        
+        .brain-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #059669 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #22c55e;
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(90deg, #22c55e, #7c3aed);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .stats-counter {
+            animation: count-up 2s ease-out;
+        }
+        
+        @keyframes count-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .feature-card {
+            backdrop-filter: blur(10px);
+            background: rgba(17, 24, 39, 0.8);
+        }
+        
+        .puzzle-category {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%);
+            backdrop-filter: blur(15px);
+        }
+        
+        .leaderboard-item {
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .leaderboard-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+        }
+        
+        .achievement-badge {
+            animation: badge-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes badge-glow {
+            from { box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); }
+            to { box-shadow: 0 0 25px rgba(249, 115, 22, 0.8); }
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hidden { display: none; }
+        
+        .modal-backdrop {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-filter backdrop-blur-lg border-b border-green-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="brain-icon text-3xl">🧠</div>
+                    <div>
+                        <h1 class="text-xl font-bold text-glow-green">MindFlex</h1>
+                        <p class="text-xs text-gray-400">with Lex</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#puzzles" class="nav-link">Puzzles</a>
+                    <a href="#leaderboard" class="nav-link">Leaderboard</a>
+                    <a href="#about" class="nav-link">About</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="achievement-badge bg-gradient-to-r from-orange-500 to-red-500 px-3 py-1 rounded-full text-xs font-bold">
+                        🔥 7 day streak
+                    </div>
+                    <button onclick="openLoginModal()" class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg font-bold transition-all">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="hero-gradient rounded-3xl p-12 glow-green pulse-glow">
+                    <div class="brain-icon text-6xl mb-6">🧠</div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 text-glow-green">
+                        Train Your Brain
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                        Challenge yourself with 184 mind-bending puzzles across 4 categories. 
+                        Compete globally and unlock your cognitive potential.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="startChallenge()" class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-xl text-lg font-bold transition-all glow-green">
+                            🚀 Start Daily Challenge
+                        </button>
+                        <button onclick="scrollToSection('puzzles')" class="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-xl text-lg font-bold transition-all glow-purple">
+                            🧩 Browse Puzzles
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="feature-card rounded-2xl p-6 text-center glow-green">
+                    <div class="text-4xl font-bold text-green-400 stats-counter">184</div>
+                    <div class="text-sm text-gray-400 mt-2">Total Puzzles</div>
+                </div>
+                <div class="feature-card rounded-2xl p-6 text-center glow-purple">
+                    <div class="text-4xl font-bold text-purple-400 stats-counter">50K+</div>
+                    <div class="text-sm text-gray-400 mt-2">Active Players</div>
+                </div>
+                <div class="feature-card rounded-2xl p-6 text-center glow-blue">
+                    <div class="text-4xl font-bold text-blue-400 stats-counter">2.3M</div>
+                    <div class="text-sm text-gray-400 mt-2">Puzzles Solved</div>
+                </div>
+                <div class="feature-card rounded-2xl p-6 text-center glow-green">
+                    <div class="text-4xl font-bold text-yellow-400 stats-counter">4.9★</div>
+                    <div class="text-sm text-gray-400 mt-2">User Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Puzzle Categories -->
+    <section id="puzzles" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-glow-purple">🧩 Puzzle Categories</h2>
+                <p class="text-xl text-gray-400">Choose your challenge and start training your brain</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Logic Puzzles -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-green cursor-pointer" onclick="openCategory('logic')">
+                    <div class="text-5xl mb-4 text-center">🔍</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-green">Logic Puzzles</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-green-400">60</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Test your reasoning skills with complex logical challenges and brain teasers.
+                    </p>
+                    <div class="bg-green-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-green-400">Medium-Hard</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-green-400">3-8 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-lg font-bold transition-all">
+                        Start Logic Training
+                    </button>
+                </div>
+
+                <!-- Word Riddles -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-purple cursor-pointer" onclick="openCategory('word')">
+                    <div class="text-5xl mb-4 text-center">📝</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-purple">Word Riddles</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-purple-400">50</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Expand your vocabulary and lateral thinking with clever word puzzles.
+                    </p>
+                    <div class="bg-purple-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-purple-400">Easy-Medium</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-purple-400">2-5 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-purple-600 hover:bg-purple-700 py-3 rounded-lg font-bold transition-all">
+                        Start Word Training
+                    </button>
+                </div>
+
+                <!-- Math Teasers -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-blue cursor-pointer" onclick="openCategory('math')">
+                    <div class="text-5xl mb-4 text-center">🔢</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-blue">Math Teasers</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-blue-400">42</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Sharpen your numerical skills with engaging mathematical challenges.
+                    </p>
+                    <div class="bg-blue-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-blue-400">Medium</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-blue-400">2-6 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold transition-all">
+                        Start Math Training
+                    </button>
+                </div>
+
+                <!-- Visual Puzzles -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-green cursor-pointer" onclick="openCategory('visual')">
+                    <div class="text-5xl mb-4 text-center">👁️</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-green">Visual Puzzles</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-yellow-400">32</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Train your visual perception and pattern recognition abilities.
+                    </p>
+                    <div class="bg-yellow-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-yellow-400">Easy-Hard</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-yellow-400">1-4 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-yellow-600 hover:bg-yellow-700 py-3 rounded-lg font-bold transition-all">
+                        Start Visual Training
+                    </button>
+                </div>
+            </div>
+
+            <!-- Total Puzzles Highlight -->
+            <div class="mt-16 text-center">
+                <div class="bg-gradient-to-r from-purple-600/20 to-green-600/20 rounded-2xl p-8 glow-purple">
+                    <h3 class="text-3xl font-bold text-glow-green mb-4">🎯 Complete Brain Training</h3>
+                    <div class="text-6xl font-bold text-glow-purple mb-4">184</div>
+                    <p class="text-xl text-gray-300 mb-6">Total Brain Challenges Across All Categories</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-400">60</div>
+                            <div class="text-xs text-gray-400">Logic</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-400">50</div>
+                            <div class="text-xs text-gray-400">Word</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">42</div>
+                            <div class="text-xs text-gray-400">Math</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-yellow-400">32</div>
+                            <div class="text-xs text-gray-400">Visual</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-glow-purple">🏆 Global Leaderboard</h2>
+                <p class="text-xl text-gray-400">See how you rank against the world's best puzzle solvers</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Leaderboard Tabs -->
+                <div class="flex justify-center mb-8">
+                    <div class="flex bg-gray-800 rounded-xl p-1 glow-purple">
+                        <button onclick="switchLeaderboard('daily')" id="daily-lb-btn" class="px-6 py-3 rounded-lg text-sm bg-purple-600 font-bold">Daily</button>
+                        <button onclick="switchLeaderboard('weekly')" id="weekly-lb-btn" class="px-6 py-3 rounded-lg text-sm font-bold">Weekly</button>
+                        <button onclick="switchLeaderboard('alltime')" id="alltime-lb-btn" class="px-6 py-3 rounded-lg text-sm font-bold">All Time</button>
+                    </div>
+                </div>
+
+                <!-- Top 3 -->
+                <div class="space-y-4 mb-8">
+                    <div class="leaderboard-item bg-gradient-to-r from-yellow-600/30 to-yellow-500/20 p-6 rounded-2xl border border-yellow-500/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-6">
+                                <span class="text-5xl">🥇</span>
+                                <div>
+                                    <div class="font-bold text-2xl text-yellow-400">BrainMaster_Lex</div>
+                                    <div class="text-sm text-gray-400">🔥 47 day streak • 184/184 solved (100%)</div>
+                                    <div class="text-xs text-gray-500">Logic: 60/60 • Word: 50/50 • Math: 42/42 • Visual: 32/32</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-yellow-400 text-3xl">3,247</div>
+                                <div class="text-sm text-gray-400">1.8 min avg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-item bg-gradient-to-r from-gray-400/30 to-gray-300/20 p-6 rounded-2xl border border-gray-400/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-6">
+                                <span class="text-5xl">🥈</span>
+                                <div>
+                                    <div class="font-bold text-2xl text-gray-300">PuzzleNinja</div>
+                                    <div class="text-sm text-gray-400">🔥 23 day streak • 156/184 solved (85%)</div>
+                                    <div class="text-xs text-gray-500">Logic: 52/60 • Word: 45/50 • Math: 35/42 • Visual: 24/32</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-gray-300 text-3xl">2,856</div>
+                                <div class="text-sm text-gray-400">2.4 min avg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-item bg-gradient-to-r from-orange-600/30 to-orange-500/20 p-6 rounded-2xl border border-orange-500/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-6">
+                                <span class="text-5xl">🥉</span>
+                                <div>
+                                    <div class="font-bold text-2xl text-orange-400">LogicLord</div>
+                                    <div class="text-sm text-gray-400">🔥 31 day streak • 142/184 solved (77%)</div>
+                                    <div class="text-xs text-gray-500">Logic: 48/60 • Word: 38/50 • Math: 32/42 • Visual: 24/32</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-orange-400 text-3xl">2,423</div>
+                                <div class="text-sm text-gray-400">2.1 min avg</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rest of leaderboard -->
+                <div class="space-y-3">
+                    <div class="leaderboard-item flex items-center justify-between p-4 bg-gray-800/80 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <span class="text-gray-400 font-bold w-8">4.</span>
+                            <div>
+                                <span class="font-bold">RiddleRaven</span>
+                                <div class="text-sm text-gray-400">134/184 solved (73%)</div>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-bold text-xl">2,154</span>
+                    </div>
+                    <div class="leaderboard-item flex items-center justify-between p-4 bg-gray-800/80 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <span class="text-gray-400 font-bold w-8">5.</span>
+                            <div>
+                                <span class="font-bold">MindBender</span>
+                                <div class="text-sm text-gray-400">128/184 solved (70%)</div>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-bold text-xl">1,932</span>
+                    </div>
+                    <div class="leaderboard-item flex items-center justify-between p-4 bg-gray-800/80 rounded-xl border-2 border-green-500/50">
+                        <div class="flex items-center gap-4">
+                            <span class="text-green-400 font-bold w-8">12.</span>
+                            <div>
+                                <span class="text-green-400 font-bold">You</span>
+                                <div class="text-sm text-green-400">89/184 solved (48%)</div>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-bold text-xl">1,247</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-glow-green">🎯 About MindFlex</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    The ultimate brain training platform designed to challenge, engage, and enhance your cognitive abilities
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="feature-card rounded-2xl p-8 text-center glow-green">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-4 text-glow-green">Cognitive Enhancement</h3>
+                    <p class="text-gray-400">
+                        Scientifically designed puzzles to improve memory, focus, problem-solving, and critical thinking skills.
+                    </p>
+                </div>
+                <div class="feature-card rounded-2xl p-8 text-center glow-purple">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h3 class="text-xl font-bold mb-4 text-glow-purple">Global Competition</h3>
+                    <p class="text-gray-400">
+                        Compete with players worldwide, track your progress, and climb the leaderboards in real-time.
+                    </p>
+                </div>
+                <div class="feature-card rounded-2xl p-8 text-center glow-blue">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold mb-4 text-glow-blue">Progress Tracking</h3>
+                    <p class="text-gray-400">
+                        Detailed analytics and insights to monitor your improvement across all puzzle categories.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="feature-card rounded-2xl p-8 glow-green">
+                    <h3 class="text-2xl font-bold mb-4 text-glow-green">🎮 Gamified Learning</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Daily challenges with bonus rewards
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Achievement system and badges
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Streak tracking and multipliers
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Level progression system
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-card rounded-2xl p-8 glow-purple">
+                    <h3 class="text-2xl font-bold mb-4 text-glow-purple">🔬 Science-Backed</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Cognitive research-based design
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Adaptive difficulty algorithms
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Neuroplasticity optimization
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Performance analytics
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <div class="brain-icon text-3xl">🧠</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-glow-green">MindFlex</h3>
+                        <p class="text-sm text-gray-400">with Lex</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Train your brain. Challenge your mind. Unlock your potential.
+                </p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Contact</a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Support</a>
+                </div>
+                <p class="text-sm text-gray-500">
+                    © 2024 MindFlex. All rights reserved. Made with 🧠 for brain training enthusiasts.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="hidden fixed inset-0 modal-backdrop flex items-center justify-center z-50">
+        <div class="bg-gray-800 rounded-2xl p-8 mx-4 max-w-md w-full glow-green">
+            <div class="text-center mb-6">
+                <div class="text-4xl mb-4">🧠</div>
+                <h2 class="text-2xl font-bold text-glow-green">Join MindFlex</h2>
+                <p class="text-gray-400">Start your brain training journey</p>
+            </div>
+            
+            <div class="space-y-4">
+                <input type="email" placeholder="Email address" class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
+                <input type="password" placeholder="Password" class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
+                
+                <button class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-xl font-bold transition-all">
+                    Sign In
+                </button>
+                
+                <div class="text-center">
+                    <span class="text-gray-400">Don't have an account? </span>
+                    <a href="#" class="text-green-400 hover:text-green-300">Sign up</a>
+                </div>
+            </div>
+            
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                ×
+            </button>
+        </div>
+    </div>
+
+    <!-- Puzzle Modal -->
+    <div id="puzzle-modal" class="hidden fixed inset-0 modal-backdrop flex items-center justify-center z-50">
+        <div class="bg-gray-800 rounded-2xl p-8 mx-4 max-w-2xl w-full glow-green">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-glow-green">Daily Challenge</h2>
+                <div class="text-green-400 font-bold" id="challenge-timer">5:00</div>
+            </div>
+            
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-xs bg-purple-600 px-3 py-1 rounded-full">Medium</span>
+                    <span class="text-xs text-gray-400">⭐ 100 points</span>
+                </div>
+                <p class="text-lg leading-relaxed" id="challenge-question">
+                    I speak without a mouth and hear without ears. I have no body, but come alive with wind. What am I?
+                </p>
+            </div>
+            
+            <div class="space-y-4">
+                <input type="text" id="challenge-answer" placeholder="Type your answer..." 
+                       class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-4 text-lg focus:outline-none focus:border-green-500">
+                
+                <div class="flex gap-3">
+                    <button onclick="submitChallenge()" class="flex-1 bg-green-600 hover:bg-green-700 py-4 rounded-xl font-bold transition-all">
+                        Submit Answer
+                    </button>
+                    <button onclick="getHint()" class="bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl font-bold transition-all">
+                        💡 Hint
+                    </button>
+                </div>
+            </div>
+            
+            <div id="challenge-result" class="hidden mt-4 text-center p-4 rounded-xl"></div>
+            
+            <button onclick="closePuzzleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                ×
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Modal functions
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+
+        function startChallenge() {
+            document.getElementById('puzzle-modal').classList.remove('hidden');
+            startChallengeTimer();
+        }
+
+        function closePuzzleModal() {
+            document.getElementById('puzzle-modal').classList.add('hidden');
+            if (challengeTimer) {
+                clearInterval(challengeTimer);
+            }
+        }
+
+        // Challenge timer
+        let challengeTimer;
+        let timeLeft = 300; // 5 minutes
+
+        function startChallengeTimer() {
+            timeLeft = 300;
+            challengeTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('challenge-timer').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft > 0) {
+                    timeLeft--;
+                } else {
+                    clearInterval(challengeTimer);
+                    document.getElementById('challenge-timer').textContent = 'Time\'s up!';
+                }
+            }, 1000);
+        }
+
+        // Challenge submission
+        function submitChallenge() {
+            const answer = document.getElementById('challenge-answer').value.toLowerCase().trim();
+            const resultDiv = document.getElementById('challenge-result');
+            
+            if (answer === 'echo') {
+                clearInterval(challengeTimer);
+                resultDiv.innerHTML = '🎉 Correct! You earned 100 points!';
+                resultDiv.className = 'mt-4 text-center p-4 rounded-xl bg-green-600/20 border border-green-500/30 text-green-400 font-bold';
+                resultDiv.classList.remove('hidden');
+            } else {
+                resultDiv.innerHTML = '❌ Not quite right. Try again!';
+                resultDiv.className = 'mt-4 text-center p-4 rounded-xl bg-red-600/20 border border-red-500/30 text-red-400 font-bold';
+                resultDiv.classList.remove('hidden');
+            }
+        }
+
+        function getHint() {
+            alert('💡 Hint: Think about sound bouncing back to you in empty spaces like mountains or caves.');
+        }
+
+        // Leaderboard switching
+        function switchLeaderboard(type) {
+            document.querySelectorAll('[id$="-lb-btn"]').forEach(btn => {
+                btn.classList.remove('bg-purple-600');
+                btn.classList.add('bg-transparent');
+            });
+            document.getElementById(type + '-lb-btn').classList.remove('bg-transparent');
+            document.getElementById(type + '-lb-btn').classList.add('bg-purple-600');
+        }
+
+        // Category opening
+        function openCategory(category) {
+            const categoryInfo = {
+                'logic': 'Logic Puzzles (60 available)',
+                'word': 'Word Riddles (50 available)', 
+                'math': 'Math Teasers (42 available)',
+                'visual': 'Visual Puzzles (32 available)'
+            };
+            alert(`🧩 Opening ${categoryInfo[category]}!\n\nThis would take you to a dedicated page with all puzzles in this category, featuring:\n• Progressive difficulty levels\n• Detailed explanations\n• Performance tracking\n• Category-specific achievements`);
+        }
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+
+        // Navigation highlighting
+        function updateActiveNav() {
+            const sections = ['home', 'puzzles', 'leaderboard', 'about'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index]?.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            revealOnScroll();
+            updateActiveNav();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            revealOnScroll();
+            
+            // Add scroll reveal class to elements
+            document.querySelectorAll('.feature-card, .puzzle-category, .leaderboard-item').forEach(el => {
+                el.classList.add('scroll-reveal');
+            });
+        });
+
+        // Navigation click handlers
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Enter key support for challenge
+        document.getElementById('challenge-answer')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitChallenge();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96372b12450a338c',t:'MTc1MzIzMTY2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindFlex with Lex - Ultimate Brain Training Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+        }
+        
+        .glow-green {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .glow-purple {
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+        }
+        
+        .glow-blue {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .text-glow-green {
+            text-shadow: 0 0 15px rgba(34, 197, 94, 0.8);
+        }
+        
+        .text-glow-purple {
+            text-shadow: 0 0 15px rgba(147, 51, 234, 0.8);
+        }
+        
+        .text-glow-blue {
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 30px rgba(34, 197, 94, 0.4); }
+            to { box-shadow: 0 0 50px rgba(34, 197, 94, 0.8); }
+        }
+        
+        .brain-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #059669 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #22c55e;
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(90deg, #22c55e, #7c3aed);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .stats-counter {
+            animation: count-up 2s ease-out;
+        }
+        
+        @keyframes count-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .feature-card {
+            backdrop-filter: blur(10px);
+            background: rgba(17, 24, 39, 0.8);
+        }
+        
+        .puzzle-category {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%);
+            backdrop-filter: blur(15px);
+        }
+        
+        .leaderboard-item {
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .leaderboard-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+        }
+        
+        .achievement-badge {
+            animation: badge-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes badge-glow {
+            from { box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); }
+            to { box-shadow: 0 0 25px rgba(249, 115, 22, 0.8); }
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hidden { display: none; }
+        
+        .modal-backdrop {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-filter backdrop-blur-lg border-b border-green-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="brain-icon text-3xl">🧠</div>
+                    <div>
+                        <h1 class="text-xl font-bold text-glow-green">MindFlex</h1>
+                        <p class="text-xs text-gray-400">with Lex</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#puzzles" class="nav-link">Puzzles</a>
+                    <a href="#leaderboard" class="nav-link">Leaderboard</a>
+                    <a href="#about" class="nav-link">About</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="achievement-badge bg-gradient-to-r from-orange-500 to-red-500 px-3 py-1 rounded-full text-xs font-bold">
+                        🔥 7 day streak
+                    </div>
+                    <button onclick="openLoginModal()" class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg font-bold transition-all">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="hero-gradient rounded-3xl p-12 glow-green pulse-glow">
+                    <div class="brain-icon text-6xl mb-6">🧠</div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 text-glow-green">
+                        Train Your Brain
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                        Challenge yourself with 184 mind-bending puzzles across 4 categories. 
+                        Compete globally and unlock your cognitive potential.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="startChallenge()" class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-xl text-lg font-bold transition-all glow-green">
+                            🚀 Start Daily Challenge
+                        </button>
+                        <button onclick="scrollToSection('puzzles')" class="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-xl text-lg font-bold transition-all glow-purple">
+                            🧩 Browse Puzzles
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="feature-card rounded-2xl p-6 text-center glow-green">
+                    <div class="text-4xl font-bold text-green-400 stats-counter">184</div>
+                    <div class="text-sm text-gray-400 mt-2">Total Puzzles</div>
+                </div>
+                <div class="feature-card rounded-2xl p-6 text-center glow-purple">
+                    <div class="text-4xl font-bold text-purple-400 stats-counter">50K+</div>
+                    <div class="text-sm text-gray-400 mt-2">Active Players</div>
+                </div>
+                <div class="feature-card rounded-2xl p-6 text-center glow-blue">
+                    <div class="text-4xl font-bold text-blue-400 stats-counter">2.3M</div>
+                    <div class="text-sm text-gray-400 mt-2">Puzzles Solved</div>
+                </div>
+                <div class="feature-card rounded-2xl p-6 text-center glow-green">
+                    <div class="text-4xl font-bold text-yellow-400 stats-counter">4.9★</div>
+                    <div class="text-sm text-gray-400 mt-2">User Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Puzzle Categories -->
+    <section id="puzzles" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-glow-purple">🧩 Puzzle Categories</h2>
+                <p class="text-xl text-gray-400">Choose your challenge and start training your brain</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Logic Puzzles -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-green cursor-pointer" onclick="openCategory('logic')">
+                    <div class="text-5xl mb-4 text-center">🔍</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-green">Logic Puzzles</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-green-400">60</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Test your reasoning skills with complex logical challenges and brain teasers.
+                    </p>
+                    <div class="bg-green-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-green-400">Medium-Hard</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-green-400">3-8 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-lg font-bold transition-all">
+                        Start Logic Training
+                    </button>
+                </div>
+
+                <!-- Word Riddles -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-purple cursor-pointer" onclick="openCategory('word')">
+                    <div class="text-5xl mb-4 text-center">📝</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-purple">Word Riddles</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-purple-400">50</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Expand your vocabulary and lateral thinking with clever word puzzles.
+                    </p>
+                    <div class="bg-purple-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-purple-400">Easy-Medium</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-purple-400">2-5 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-purple-600 hover:bg-purple-700 py-3 rounded-lg font-bold transition-all">
+                        Start Word Training
+                    </button>
+                </div>
+
+                <!-- Math Teasers -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-blue cursor-pointer" onclick="openCategory('math')">
+                    <div class="text-5xl mb-4 text-center">🔢</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-blue">Math Teasers</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-blue-400">42</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Sharpen your numerical skills with engaging mathematical challenges.
+                    </p>
+                    <div class="bg-blue-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-blue-400">Medium</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-blue-400">2-6 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold transition-all">
+                        Start Math Training
+                    </button>
+                </div>
+
+                <!-- Visual Puzzles -->
+                <div class="puzzle-category rounded-2xl p-8 card-hover glow-green cursor-pointer" onclick="openCategory('visual')">
+                    <div class="text-5xl mb-4 text-center">👁️</div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-glow-green">Visual Puzzles</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-3xl font-bold text-yellow-400">32</span>
+                        <span class="text-gray-400 ml-2">puzzles</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-center mb-6">
+                        Train your visual perception and pattern recognition abilities.
+                    </p>
+                    <div class="bg-yellow-600/20 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span>Difficulty:</span>
+                            <span class="text-yellow-400">Easy-Hard</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Avg Time:</span>
+                            <span class="text-yellow-400">1-4 min</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-yellow-600 hover:bg-yellow-700 py-3 rounded-lg font-bold transition-all">
+                        Start Visual Training
+                    </button>
+                </div>
+            </div>
+
+            <!-- Total Puzzles Highlight -->
+            <div class="mt-16 text-center">
+                <div class="bg-gradient-to-r from-purple-600/20 to-green-600/20 rounded-2xl p-8 glow-purple">
+                    <h3 class="text-3xl font-bold text-glow-green mb-4">🎯 Complete Brain Training</h3>
+                    <div class="text-6xl font-bold text-glow-purple mb-4">184</div>
+                    <p class="text-xl text-gray-300 mb-6">Total Brain Challenges Across All Categories</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-400">60</div>
+                            <div class="text-xs text-gray-400">Logic</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-400">50</div>
+                            <div class="text-xs text-gray-400">Word</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">42</div>
+                            <div class="text-xs text-gray-400">Math</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-yellow-400">32</div>
+                            <div class="text-xs text-gray-400">Visual</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-glow-purple">🏆 Global Leaderboard</h2>
+                <p class="text-xl text-gray-400">See how you rank against the world's best puzzle solvers</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Leaderboard Tabs -->
+                <div class="flex justify-center mb-8">
+                    <div class="flex bg-gray-800 rounded-xl p-1 glow-purple">
+                        <button onclick="switchLeaderboard('daily')" id="daily-lb-btn" class="px-6 py-3 rounded-lg text-sm bg-purple-600 font-bold">Daily</button>
+                        <button onclick="switchLeaderboard('weekly')" id="weekly-lb-btn" class="px-6 py-3 rounded-lg text-sm font-bold">Weekly</button>
+                        <button onclick="switchLeaderboard('alltime')" id="alltime-lb-btn" class="px-6 py-3 rounded-lg text-sm font-bold">All Time</button>
+                    </div>
+                </div>
+
+                <!-- Top 3 -->
+                <div class="space-y-4 mb-8">
+                    <div class="leaderboard-item bg-gradient-to-r from-yellow-600/30 to-yellow-500/20 p-6 rounded-2xl border border-yellow-500/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-6">
+                                <span class="text-5xl">🥇</span>
+                                <div>
+                                    <div class="font-bold text-2xl text-yellow-400">BrainMaster_Lex</div>
+                                    <div class="text-sm text-gray-400">🔥 47 day streak • 184/184 solved (100%)</div>
+                                    <div class="text-xs text-gray-500">Logic: 60/60 • Word: 50/50 • Math: 42/42 • Visual: 32/32</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-yellow-400 text-3xl">3,247</div>
+                                <div class="text-sm text-gray-400">1.8 min avg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-item bg-gradient-to-r from-gray-400/30 to-gray-300/20 p-6 rounded-2xl border border-gray-400/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-6">
+                                <span class="text-5xl">🥈</span>
+                                <div>
+                                    <div class="font-bold text-2xl text-gray-300">PuzzleNinja</div>
+                                    <div class="text-sm text-gray-400">🔥 23 day streak • 156/184 solved (85%)</div>
+                                    <div class="text-xs text-gray-500">Logic: 52/60 • Word: 45/50 • Math: 35/42 • Visual: 24/32</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-gray-300 text-3xl">2,856</div>
+                                <div class="text-sm text-gray-400">2.4 min avg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-item bg-gradient-to-r from-orange-600/30 to-orange-500/20 p-6 rounded-2xl border border-orange-500/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-6">
+                                <span class="text-5xl">🥉</span>
+                                <div>
+                                    <div class="font-bold text-2xl text-orange-400">LogicLord</div>
+                                    <div class="text-sm text-gray-400">🔥 31 day streak • 142/184 solved (77%)</div>
+                                    <div class="text-xs text-gray-500">Logic: 48/60 • Word: 38/50 • Math: 32/42 • Visual: 24/32</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-orange-400 text-3xl">2,423</div>
+                                <div class="text-sm text-gray-400">2.1 min avg</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rest of leaderboard -->
+                <div class="space-y-3">
+                    <div class="leaderboard-item flex items-center justify-between p-4 bg-gray-800/80 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <span class="text-gray-400 font-bold w-8">4.</span>
+                            <div>
+                                <span class="font-bold">RiddleRaven</span>
+                                <div class="text-sm text-gray-400">134/184 solved (73%)</div>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-bold text-xl">2,154</span>
+                    </div>
+                    <div class="leaderboard-item flex items-center justify-between p-4 bg-gray-800/80 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <span class="text-gray-400 font-bold w-8">5.</span>
+                            <div>
+                                <span class="font-bold">MindBender</span>
+                                <div class="text-sm text-gray-400">128/184 solved (70%)</div>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-bold text-xl">1,932</span>
+                    </div>
+                    <div class="leaderboard-item flex items-center justify-between p-4 bg-gray-800/80 rounded-xl border-2 border-green-500/50">
+                        <div class="flex items-center gap-4">
+                            <span class="text-green-400 font-bold w-8">12.</span>
+                            <div>
+                                <span class="text-green-400 font-bold">You</span>
+                                <div class="text-sm text-green-400">89/184 solved (48%)</div>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-bold text-xl">1,247</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-glow-green">🎯 About MindFlex</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    The ultimate brain training platform designed to challenge, engage, and enhance your cognitive abilities
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="feature-card rounded-2xl p-8 text-center glow-green">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-4 text-glow-green">Cognitive Enhancement</h3>
+                    <p class="text-gray-400">
+                        Scientifically designed puzzles to improve memory, focus, problem-solving, and critical thinking skills.
+                    </p>
+                </div>
+                <div class="feature-card rounded-2xl p-8 text-center glow-purple">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h3 class="text-xl font-bold mb-4 text-glow-purple">Global Competition</h3>
+                    <p class="text-gray-400">
+                        Compete with players worldwide, track your progress, and climb the leaderboards in real-time.
+                    </p>
+                </div>
+                <div class="feature-card rounded-2xl p-8 text-center glow-blue">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold mb-4 text-glow-blue">Progress Tracking</h3>
+                    <p class="text-gray-400">
+                        Detailed analytics and insights to monitor your improvement across all puzzle categories.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="feature-card rounded-2xl p-8 glow-green">
+                    <h3 class="text-2xl font-bold mb-4 text-glow-green">🎮 Gamified Learning</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Daily challenges with bonus rewards
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Achievement system and badges
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Streak tracking and multipliers
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-400">✓</span>
+                            Level progression system
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-card rounded-2xl p-8 glow-purple">
+                    <h3 class="text-2xl font-bold mb-4 text-glow-purple">🔬 Science-Backed</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Cognitive research-based design
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Adaptive difficulty algorithms
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Neuroplasticity optimization
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-purple-400">✓</span>
+                            Performance analytics
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <div class="brain-icon text-3xl">🧠</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-glow-green">MindFlex</h3>
+                        <p class="text-sm text-gray-400">with Lex</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Train your brain. Challenge your mind. Unlock your potential.
+                </p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Contact</a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Support</a>
+                </div>
+                <p class="text-sm text-gray-500">
+                    © 2024 MindFlex. All rights reserved. Made with 🧠 for brain training enthusiasts.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="hidden fixed inset-0 modal-backdrop flex items-center justify-center z-50">
+        <div class="bg-gray-800 rounded-2xl p-8 mx-4 max-w-md w-full glow-green">
+            <div class="text-center mb-6">
+                <div class="text-4xl mb-4">🧠</div>
+                <h2 class="text-2xl font-bold text-glow-green">Join MindFlex</h2>
+                <p class="text-gray-400">Start your brain training journey</p>
+            </div>
+            
+            <div class="space-y-4">
+                <input type="email" placeholder="Email address" class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
+                <input type="password" placeholder="Password" class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
+                
+                <button class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-xl font-bold transition-all">
+                    Sign In
+                </button>
+                
+                <div class="text-center">
+                    <span class="text-gray-400">Don't have an account? </span>
+                    <a href="#" class="text-green-400 hover:text-green-300">Sign up</a>
+                </div>
+            </div>
+            
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                ×
+            </button>
+        </div>
+    </div>
+
+    <!-- Puzzle Modal -->
+    <div id="puzzle-modal" class="hidden fixed inset-0 modal-backdrop flex items-center justify-center z-50">
+        <div class="bg-gray-800 rounded-2xl p-8 mx-4 max-w-2xl w-full glow-green">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-glow-green">Daily Challenge</h2>
+                <div class="text-green-400 font-bold" id="challenge-timer">5:00</div>
+            </div>
+            
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-xs bg-purple-600 px-3 py-1 rounded-full">Medium</span>
+                    <span class="text-xs text-gray-400">⭐ 100 points</span>
+                </div>
+                <p class="text-lg leading-relaxed" id="challenge-question">
+                    I speak without a mouth and hear without ears. I have no body, but come alive with wind. What am I?
+                </p>
+            </div>
+            
+            <div class="space-y-4">
+                <input type="text" id="challenge-answer" placeholder="Type your answer..." 
+                       class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-4 text-lg focus:outline-none focus:border-green-500">
+                
+                <div class="flex gap-3">
+                    <button onclick="submitChallenge()" class="flex-1 bg-green-600 hover:bg-green-700 py-4 rounded-xl font-bold transition-all">
+                        Submit Answer
+                    </button>
+                    <button onclick="getHint()" class="bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl font-bold transition-all">
+                        💡 Hint
+                    </button>
+                </div>
+            </div>
+            
+            <div id="challenge-result" class="hidden mt-4 text-center p-4 rounded-xl"></div>
+            
+            <button onclick="closePuzzleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                ×
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Modal functions
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+
+        function startChallenge() {
+            document.getElementById('puzzle-modal').classList.remove('hidden');
+            startChallengeTimer();
+        }
+
+        function closePuzzleModal() {
+            document.getElementById('puzzle-modal').classList.add('hidden');
+            if (challengeTimer) {
+                clearInterval(challengeTimer);
+            }
+        }
+
+        // Challenge timer
+        let challengeTimer;
+        let timeLeft = 300; // 5 minutes
+
+        function startChallengeTimer() {
+            timeLeft = 300;
+            challengeTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('challenge-timer').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft > 0) {
+                    timeLeft--;
+                } else {
+                    clearInterval(challengeTimer);
+                    document.getElementById('challenge-timer').textContent = 'Time\'s up!';
+                }
+            }, 1000);
+        }
+
+        // Challenge submission
+        function submitChallenge() {
+            const answer = document.getElementById('challenge-answer').value.toLowerCase().trim();
+            const resultDiv = document.getElementById('challenge-result');
+            
+            if (answer === 'echo') {
+                clearInterval(challengeTimer);
+                resultDiv.innerHTML = '🎉 Correct! You earned 100 points!';
+                resultDiv.className = 'mt-4 text-center p-4 rounded-xl bg-green-600/20 border border-green-500/30 text-green-400 font-bold';
+                resultDiv.classList.remove('hidden');
+            } else {
+                resultDiv.innerHTML = '❌ Not quite right. Try again!';
+                resultDiv.className = 'mt-4 text-center p-4 rounded-xl bg-red-600/20 border border-red-500/30 text-red-400 font-bold';
+                resultDiv.classList.remove('hidden');
+            }
+        }
+
+        function getHint() {
+            alert('💡 Hint: Think about sound bouncing back to you in empty spaces like mountains or caves.');
+        }
+
+        // Leaderboard switching
+        function switchLeaderboard(type) {
+            document.querySelectorAll('[id$="-lb-btn"]').forEach(btn => {
+                btn.classList.remove('bg-purple-600');
+                btn.classList.add('bg-transparent');
+            });
+            document.getElementById(type + '-lb-btn').classList.remove('bg-transparent');
+            document.getElementById(type + '-lb-btn').classList.add('bg-purple-600');
+        }
+
+        // Category opening
+        function openCategory(category) {
+            const categoryInfo = {
+                'logic': 'Logic Puzzles (60 available)',
+                'word': 'Word Riddles (50 available)', 
+                'math': 'Math Teasers (42 available)',
+                'visual': 'Visual Puzzles (32 available)'
+            };
+            alert(`🧩 Opening ${categoryInfo[category]}!\n\nThis would take you to a dedicated page with all puzzles in this category, featuring:\n• Progressive difficulty levels\n• Detailed explanations\n• Performance tracking\n• Category-specific achievements`);
+        }
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+
+        // Navigation highlighting
+        function updateActiveNav() {
+            const sections = ['home', 'puzzles', 'leaderboard', 'about'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index]?.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            revealOnScroll();
+            updateActiveNav();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            revealOnScroll();
+            
+            // Add scroll reveal class to elements
+            document.querySelectorAll('.feature-card, .puzzle-category, .leaderboard-item').forEach(el => {
+                el.classList.add('scroll-reveal');
+            });
+        });
+
+        // Navigation click handlers
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Enter key support for challenge
+        document.getElementById('challenge-answer')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitChallenge();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96372b12450a338c',t:'MTc1MzIzMTY2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
