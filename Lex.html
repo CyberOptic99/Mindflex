@@ -594,14 +594,13 @@
 
         // --- Simple anonymous user handling ---
         function currentUserName() {
-            // If the user signed in we would use their account; for now use 'You' or saved name
             const name = localStorage.getItem('mindflex_user_name');
             return name || 'You';
         }
 
         // --- Timer ---
         let challengeTimer;
-        let timeLeft = 300; // default 5 minutes
+        let timeLeft = 300;
         function startChallengeTimer(duration=300) {
             clearInterval(challengeTimer);
             timeLeft = duration;
@@ -612,7 +611,6 @@
                 } else {
                     clearInterval(challengeTimer);
                     document.getElementById('challenge-timer').textContent = "Time's up!";
-                    // Auto-submit as wrong if desired
                 }
             }, 1000);
         }
@@ -664,13 +662,11 @@
                 progress[pid].solvedAt = Date.now();
                 saveProgress(progress);
 
-                // update leaderboard
                 const board = loadLeaderboard();
                 const name = currentUserName();
                 const entry = board.find(e => e.name === name) || { name, score: 0 };
                 entry.score += p.points;
                 if (!board.find(e => e.name === name)) board.push(entry);
-                // sort and keep top 50
                 board.sort((a,b) => b.score - a.score);
                 saveLeaderboard(board.slice(0,50));
 
@@ -689,11 +685,8 @@
 
         // --- Category UI ---
         function openCategory(category) {
-            // Build a lightweight list and prompt user to pick one
             const list = puzzles.filter(p => p.category === category);
             if (list.length === 0) { alert('No puzzles in this category yet.'); return; }
-
-            // Build a prompt-like selection using window.prompt for simplicity
             let message = `Select a puzzle in ${category} by number:\n`;
             list.forEach((p, i) => {
                 message += `${i+1}. [${p.difficulty}] ${p.question.substring(0,60)}...\n`;
@@ -714,9 +707,16 @@
             }
             let html = '<div class="space-y-4 mb-8">';
             board.slice(0,10).forEach((e, i) => {
-                const colorClass = i === 0 ? 'from-yellow-600/30 to-yellow-500/20 border-yellow-500/40' : 'bg-gray-800/80';
-                html += `<div class="leaderboard-item p-6 rounded-2xl border ${i===0?('border-yellow-500/40'):('border-gray-700/40')}" style="display:flex;justify-content:space-between;align-items:center;">
-                    <div><div class="font-bold text-xl">${i+1}. ${escapeHtml(e.name)}</div><div class="text-sm text-gray-400">Score: ${e.score}</div></div>
+                const label = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+                const accent = i === 0 ? 'bg-gradient-to-r from-yellow-600/30 to-yellow-500/20 border-yellow-500/40' : 'bg-gray-800/80 border-gray-700/40';
+                html += `<div class="leaderboard-item p-6 rounded-2xl border ${accent}" style="display:flex;justify-content:space-between;align-items:center;">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">${label}</span>
+                        <div>
+                            <div class="font-bold text-xl">${escapeHtml(e.name)}</div>
+                            <div class="text-sm text-gray-400">Score: ${e.score}</div>
+                        </div>
+                    </div>
                     <div class="font-bold text-2xl text-green-400">${e.score}</div>
                 </div>`;
             });
@@ -724,13 +724,13 @@
             container.innerHTML = html;
         }
 
-        // --- Utility ---
-        function escapeHtml(str) { return String(str).replace(/[&<>"]+/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+        }
 
-        // --- Render category counts and total ---
         function renderCategoryCounts() {
             const counts = { logic: 0, word: 0, math: 0, visual: 0 };
-            puzzles.forEach(p => { counts[p.category] = (counts[p.category]||0) + 1; });
+            puzzles.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
             document.getElementById('logic-count').textContent = counts.logic || 0;
             document.getElementById('word-count').textContent = counts.word || 0;
             document.getElementById('math-count').textContent = counts.math || 0;
@@ -739,7 +739,6 @@
             document.getElementById('total-puzzles').textContent = puzzles.length;
         }
 
-        // --- Smooth scrolling, nav, and reveal (kept simple) ---
         function scrollToSection(sectionId) {
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
@@ -771,14 +770,12 @@
         window.addEventListener('scroll', () => { revealOnScroll(); updateActiveNav(); });
 
         document.addEventListener('DOMContentLoaded', () => {
-            // attach enter key
             document.getElementById('challenge-answer')?.addEventListener('keypress', function(e) { if (e.key === 'Enter') submitChallenge(); });
             document.querySelectorAll('.feature-card, .puzzle-category, .leaderboard-item').forEach(el => el.classList.add('scroll-reveal'));
             renderCategoryCounts();
             renderLeaderboard();
             revealOnScroll();
 
-            // small demo: prefill leaderboard if empty (optional)
             if (loadLeaderboard().length === 0) {
                 const demo = [{name:'BrainMaster_Lex',score:3247},{name:'PuzzleNinja',score:2856},{name:'LogicLord',score:2423},{name:currentUserName(),score:1247}];
                 saveLeaderboard(demo);
