@@ -156,7 +156,6 @@
     </style>
 </head>
 <body class="text-white">
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-filter backdrop-blur-lg border-b border-green-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -187,7 +186,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="pt-20 pb-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -216,7 +214,6 @@
                 </div>
             </div>
 
-            <!-- Stats Grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                 <div class="feature-card rounded-2xl p-6 text-center glow-green">
                     <div class="text-4xl font-bold text-green-400 stats-counter" id="total-puzzles">184</div>
@@ -248,7 +245,6 @@
         </div>
     </section>
 
-    <!-- Puzzle Categories -->
     <section id="puzzles" class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -257,7 +253,6 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Logic Puzzles -->
                 <div class="puzzle-category rounded-2xl p-8 card-hover glow-green cursor-pointer" onclick="openCategory('logic')">
                     <div class="text-5xl mb-4 text-center">🔍</div>
                     <h3 class="text-2xl font-bold mb-3 text-center text-glow-green">Logic Puzzles</h3>
@@ -283,7 +278,6 @@
                     </button>
                 </div>
 
-                <!-- Word Riddles -->
                 <div class="puzzle-category rounded-2xl p-8 card-hover glow-purple cursor-pointer" onclick="openCategory('word')">
                     <div class="text-5xl mb-4 text-center">📝</div>
                     <h3 class="text-2xl font-bold mb-3 text-center text-glow-purple">Word Riddles</h3>
@@ -309,7 +303,6 @@
                     </button>
                 </div>
 
-                <!-- Math Teasers -->
                 <div class="puzzle-category rounded-2xl p-8 card-hover glow-blue cursor-pointer" onclick="openCategory('math')">
                     <div class="text-5xl mb-4 text-center">🔢</div>
                     <h3 class="text-2xl font-bold mb-3 text-center text-glow-blue">Math Teasers</h3>
@@ -335,7 +328,6 @@
                     </button>
                 </div>
 
-                <!-- Visual Puzzles -->
                 <div class="puzzle-category rounded-2xl p-8 card-hover glow-green cursor-pointer" onclick="openCategory('visual')">
                     <div class="text-5xl mb-4 text-center">👁️</div>
                     <h3 class="text-2xl font-bold mb-3 text-center text-glow-green">Visual Puzzles</h3>
@@ -362,7 +354,6 @@
                 </div>
             </div>
 
-            <!-- Total Puzzles Highlight -->
             <div class="mt-16 text-center">
                 <div class="bg-gradient-to-r from-purple-600/20 to-green-600/20 rounded-2xl p-8 glow-purple">
                     <h3 class="text-3xl font-bold text-glow-green mb-4">🎯 Complete Brain Training</h3>
@@ -391,7 +382,6 @@
         </div>
     </section>
 
-    <!-- Leaderboard Section -->
     <section id="leaderboard" class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -413,7 +403,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -426,76 +415,34 @@
             <div class="grid md:grid-cols-3 gap-8 mb-16">
                 <div class="feature-card rounded-2xl p-8 text-center glow-green">
                     <div class="text-4xl mb-4">🧠</div>
-                    <h3 class="text-xl font-bold mb-4 text-glow-green">Cognitive Enhancement</h3>
-                    <p class="text-gray-400">
-                        Scientifically designed puzzles to improve memory, focus, problem-solving, and critical thinking skills.
-                    </p>
+                    <div class="text-xs text-gray-400">Cognitive Enhancement</div>
+                    <p class="text-gray-400 mt-2">Scientifically designed puzzles to improve memory, focus, problem-solving, and critical thinking skills.</p>
                 </div>
                 <div class="feature-card rounded-2xl p-8 text-center glow-purple">
                     <div class="text-4xl mb-4">🏆</div>
-                    <h3 class="text-xl font-bold mb-4 text-glow-purple">Global Competition</h3>
-                    <p class="text-gray-400">
-                        Compete with players worldwide, track your progress, and climb the leaderboards in real-time.
-                    </p>
+                    <div class="text-xs text-gray-400">Global Competition</div>
+                    <p class="text-gray-400 mt-2">Compete with players worldwide, track your progress, and climb the leaderboards in real-time.</p>
                 </div>
                 <div class="feature-card rounded-2xl p-8 text-center glow-blue">
                     <div class="text-4xl mb-4">📊</div>
-                    <h3 class="text-xl font-bold mb-4 text-glow-blue">Progress Tracking</h3>
-                    <p class="text-gray-400">
-                        Detailed analytics and insights to monitor your improvement across all puzzle categories.
-                    </p>
+                    <div class="text-xs text-gray-400">Progress Tracking</div>
+                    <p class="text-gray-400 mt-2">Detailed analytics and insights to monitor your improvement across all puzzle categories.</p>
                 </div>
             </div>
 
-            <!-- Features Grid -->
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="feature-card rounded-2xl p-8 glow-green">
                     <h3 class="text-2xl font-bold mb-4 text-glow-green">🎮 Gamified Learning</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center gap-3">
-                            <span class="text-green-400">✓</span>
-                            Daily challenges with bonus rewards
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-green-400">✓</span>
-                            Achievement system and badges
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-green-400">✓</span>
-                            Streak tracking and multipliers
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-green-400">✓</span>
-                            Level progression system
-                        </li>
-                    </ul>
+                    <ul class="space-y-3 text-gray-400"><li>Daily challenges with bonus rewards</li><li>Achievement system and badges</li><li>Streak tracking and multipliers</li><li>Level progression system</li></ul>
                 </div>
                 <div class="feature-card rounded-2xl p-8 glow-purple">
                     <h3 class="text-2xl font-bold mb-4 text-glow-purple">🔬 Science-Backed</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center gap-3">
-                            <span class="text-purple-400">✓</span>
-                            Cognitive research-based design
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-purple-400">✓</span>
-                            Adaptive difficulty algorithms
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-purple-400">✓</span>
-                            Neuroplasticity optimization
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-purple-400">✓</span>
-                            Performance analytics
-                        </li>
-                    </ul>
+                    <ul class="space-y-3 text-gray-400"><li>Cognitive research-based design</li><li>Adaptive difficulty algorithms</li><li>Neuroplasticity optimization</li><li>Performance analytics</li></ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
@@ -506,88 +453,33 @@
                         <p class="text-sm text-gray-400">with Lex</p>
                     </div>
                 </div>
-                <p class="text-gray-400 mb-6">
-                    Train your brain. Challenge your mind. Unlock your potential.
-                </p>
-                <div class="flex justify-center space-x-6 mb-6">
-                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Contact</a>
-                    <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Support</a>
-                </div>
-                <p class="text-sm text-gray-500">
-                    © 2024 MindFlex. All rights reserved. Made with 🧠 for brain training enthusiasts.
-                </p>
+                <p class="text-gray-400 mb-6">Train your brain. Challenge your mind. Unlock your potential.</p>
+                <div class="flex justify-center space-x-6 mb-6"><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Privacy Policy</a><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Terms of Service</a><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Contact</a><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Support</a></div>
+                <p class="text-sm text-gray-500">© 2024 MindFlex. All rights reserved. Made with 🧠 for brain training enthusiasts.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Login Modal -->
     <div id="login-modal" class="hidden fixed inset-0 modal-backdrop flex items-center justify-center z-50">
         <div class="bg-gray-800 rounded-2xl p-8 mx-4 max-w-md w-full glow-green">
-            <div class="text-center mb-6">
-                <div class="text-4xl mb-4">🧠</div>
-                <h2 class="text-2xl font-bold text-glow-green">Join MindFlex</h2>
-                <p class="text-gray-400">Start your brain training journey</p>
-            </div>
-            
+            <div class="text-center mb-6"><div class="text-4xl mb-4">🧠</div><h2 class="text-2xl font-bold text-glow-green">Join MindFlex</h2><p class="text-gray-400">Start your brain training journey</p></div>
             <div class="space-y-4">
                 <input id="login-email" type="email" placeholder="Email address" class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
                 <input id="login-password" type="password" placeholder="Password" class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500">
-                
-                <button id="login-btn" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-xl font-bold transition-all">
-                    Sign In
-                </button>
-                
-                <div class="text-center">
-                    <span class="text-gray-400">Don't have an account? </span>
-                    <a href="#" class="text-green-400 hover:text-green-300">Sign up</a>
-                </div>
+                <button id="login-btn" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-xl font-bold transition-all">Sign In</button>
+                <div class="text-center"><span class="text-gray-400">Don't have an account? </span><a href="#" class="text-green-400 hover:text-green-300">Sign up</a></div>
             </div>
-            
-            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
-                ×
-            </button>
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
         </div>
     </div>
 
-    <!-- Puzzle Modal -->
     <div id="puzzle-modal" class="hidden fixed inset-0 modal-backdrop flex items-center justify-center z-50">
         <div class="bg-gray-800 rounded-2xl p-8 mx-4 max-w-2xl w-full glow-green">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-glow-green" id="puzzle-title">Daily Challenge</h2>
-                <div class="text-green-400 font-bold" id="challenge-timer">5:00</div>
-            </div>
-            
-            <div class="mb-6">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-xs bg-purple-600 px-3 py-1 rounded-full" id="puzzle-difficulty">Medium</span>
-                    <span class="text-xs text-gray-400" id="puzzle-points">⭐ 100 points</span>
-                </div>
-                <p class="text-lg leading-relaxed" id="challenge-question">
-                    <!-- question injected -->
-                </p>
-            </div>
-            
-            <div class="space-y-4">
-                <input type="text" id="challenge-answer" placeholder="Type your answer..." 
-                       class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-4 text-lg focus:outline-none focus:border-green-500">
-                
-                <div class="flex gap-3">
-                    <button onclick="submitChallenge()" class="flex-1 bg-green-600 hover:bg-green-700 py-4 rounded-xl font-bold transition-all">
-                        Submit Answer
-                    </button>
-                    <button onclick="getHint()" class="bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl font-bold transition-all">
-                        💡 Hint
-                    </button>
-                </div>
-            </div>
-            
+            <div class="flex items-center justify-between mb-6"><h2 class="text-2xl font-bold text-glow-green" id="puzzle-title">Daily Challenge</h2><div class="text-green-400 font-bold" id="challenge-timer">5:00</div></div>
+            <div class="mb-6"><div class="flex items-center gap-2 mb-4"><span class="text-xs bg-purple-600 px-3 py-1 rounded-full" id="puzzle-difficulty">Medium</span><span class="text-xs text-gray-400" id="puzzle-points">⭐ 100 points</span></div><p class="text-lg leading-relaxed" id="challenge-question"></p></div>
+            <div class="space-y-4"><input type="text" id="challenge-answer" placeholder="Type your answer..." class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-4 text-lg focus:outline-none focus:border-green-500"><div class="flex gap-3"><button onclick="submitChallenge()" class="flex-1 bg-green-600 hover:bg-green-700 py-4 rounded-xl font-bold transition-all">Submit Answer</button><button onclick="getHint()" class="bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl font-bold transition-all">💡 Hint</button></div></div>
             <div id="challenge-result" class="hidden mt-4 text-center p-4 rounded-xl"></div>
-            
-            <button onclick="closePuzzleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
-                ×
-            </button>
+            <button onclick="closePuzzleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
         </div>
     </div>
 
@@ -603,49 +495,51 @@
             { id: 'visual-2', category: 'visual', question: 'Which shape has no corners: circle, square, triangle, pentagon?', answer: 'circle', difficulty: 'Easy', points: 55, hint: 'Think of a wheel.' }
         ];
 
-        const STORAGE = {
-            progress: 'mindflex_progress_v2',
-            leaderboard: 'mindflex_leaderboard_v2',
+        const storageKeys = {
+            progress: 'mindflex_progress_v3',
+            leaderboard: 'mindflex_leaderboard_v3',
             userName: 'mindflex_user_name',
             sessionDate: 'mindflex_session_date'
         };
-
-        function getPlayerName() {
-            return localStorage.getItem(STORAGE.userName) || 'You';
-        }
-
-        function setPlayerName(name) {
-            localStorage.setItem(STORAGE.userName, name || 'You');
-            renderProfile();
-        }
 
         function defaultProgress() {
             return {
                 streak: 0,
                 bestScore: 0,
-                totalSolved: 0,
                 solved: {},
-                lastSolvedDate: null,
+                totalSolved: 0,
                 lastSeenDate: null
             };
         }
 
+        function getPlayerName() {
+            return localStorage.getItem(storageKeys.userName) || 'You';
+        }
+
+        function setPlayerName(name) {
+            localStorage.setItem(storageKeys.userName, name || 'You');
+            renderLeaderboard();
+            renderProfile();
+        }
+
         function loadProgress() {
             try {
-                const raw = localStorage.getItem(STORAGE.progress);
-                return raw ? { ...defaultProgress(), ...JSON.parse(raw), solved: JSON.parse(raw).solved || {} } : defaultProgress();
+                const raw = localStorage.getItem(storageKeys.progress);
+                if (!raw) return defaultProgress();
+                const parsed = JSON.parse(raw);
+                return { ...defaultProgress(), ...parsed, solved: parsed.solved || {} };
             } catch (error) {
                 return defaultProgress();
             }
         }
 
         function saveProgress(progress) {
-            localStorage.setItem(STORAGE.progress, JSON.stringify(progress));
+            localStorage.setItem(storageKeys.progress, JSON.stringify(progress));
         }
 
         function loadLeaderboard() {
             try {
-                const raw = localStorage.getItem(STORAGE.leaderboard);
+                const raw = localStorage.getItem(storageKeys.leaderboard);
                 return raw ? JSON.parse(raw) : [
                     { name: 'BrainMaster_Lex', score: 3247 },
                     { name: 'PuzzleNinja', score: 2856 },
@@ -659,32 +553,25 @@
         }
 
         function saveLeaderboard(board) {
-            localStorage.setItem(STORAGE.leaderboard, JSON.stringify(board));
+            localStorage.setItem(storageKeys.leaderboard, JSON.stringify(board));
         }
 
         function getTodayKey() {
-            const now = new Date();
-            return now.toISOString().slice(0, 10);
-        }
-
-        function getDailyChallenge() {
-            const today = getTodayKey();
-            const seed = today.split('-').join('').split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
-            return puzzles[seed % puzzles.length];
+            return new Date().toISOString().slice(0, 10);
         }
 
         function updateStreak(progress) {
             const today = getTodayKey();
-            const previous = progress.lastSeenDate;
+            const lastDay = progress.lastSeenDate;
 
-            if (!previous) {
+            if (!lastDay) {
                 progress.streak = 1;
-            } else if (previous !== today) {
-                const date = new Date(previous);
-                const tomorrow = new Date(date);
-                tomorrow.setDate(date.getDate() + 1);
-                const tomorrowKey = tomorrow.toISOString().slice(0, 10);
-                progress.streak = tomorrowKey === today ? (progress.streak || 0) + 1 : 1;
+            } else if (lastDay !== today) {
+                const lastDate = new Date(lastDay);
+                const nextDate = new Date(lastDate);
+                nextDate.setDate(lastDate.getDate() + 1);
+                const nextKey = nextDate.toISOString().slice(0, 10);
+                progress.streak = nextKey === today ? (progress.streak || 0) + 1 : 1;
             }
 
             progress.lastSeenDate = today;
@@ -694,8 +581,7 @@
         function renderProfile() {
             const progress = loadProgress();
             const solvedCount = Object.keys(progress.solved || {}).length;
-            const totalPuzzles = puzzles.length;
-            const percentage = Math.round((solvedCount / totalPuzzles) * 100);
+            const percentage = Math.round((solvedCount / puzzles.length) * 100);
 
             document.getElementById('progress-solved').textContent = solvedCount;
             document.getElementById('progress-score').textContent = progress.bestScore || 0;
@@ -703,9 +589,8 @@
             document.getElementById('progress-text').textContent = `${percentage}% complete`;
             document.getElementById('progress-bar').style.width = `${percentage}%`;
             document.getElementById('daily-streak-pill').textContent = `🔥 ${(progress.streak || 0)} day streak`;
-
-            const playerName = getPlayerName();
-            document.getElementById('login-email').value = playerName !== 'You' ? playerName : '';
+            const userName = getPlayerName();
+            if (userName && userName !== 'You') document.getElementById('login-email').value = userName;
         }
 
         function renderLeaderboard() {
@@ -715,22 +600,22 @@
             const progress = loadProgress();
             const meScore = progress.bestScore || 0;
 
-            const enriched = [...board];
-            const match = enriched.find(entry => entry.name === me);
-            if (match) {
-                match.score = Math.max(match.score, meScore);
+            const merged = [...board];
+            const existingIndex = merged.findIndex(entry => entry.name === me);
+            if (existingIndex >= 0) {
+                merged[existingIndex].score = Math.max(merged[existingIndex].score, meScore);
             } else {
-                enriched.push({ name: me, score: meScore });
+                merged.push({ name: me, score: meScore });
             }
 
-            enriched.sort((a, b) => b.score - a.score);
-            saveLeaderboard(enriched.slice(0, 10));
+            merged.sort((a, b) => b.score - a.score);
+            saveLeaderboard(merged.slice(0, 10));
 
-            const html = enriched.slice(0, 5).map((entry, index) => {
+            container.innerHTML = merged.slice(0, 5).map((entry, index) => {
                 const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
-                const highlighted = entry.name === me ? 'border-green-500/60 bg-green-500/10' : 'border-gray-700/60 bg-gray-800/80';
+                const activeClass = entry.name === me ? 'border-green-500/60 bg-green-500/10' : 'border-gray-700/60 bg-gray-800/80';
                 return `
-                    <div class="leaderboard-item flex items-center justify-between p-4 rounded-2xl border ${highlighted}">
+                    <div class="leaderboard-item flex items-center justify-between p-4 rounded-2xl border ${activeClass}">
                         <div class="flex items-center gap-4">
                             <span class="text-2xl">${medal}</span>
                             <div>
@@ -742,17 +627,6 @@
                     </div>
                 `;
             }).join('');
-
-            container.innerHTML = html;
-        }
-
-        function switchLeaderboard(type) {
-            document.querySelectorAll('[id$="-lb-btn"]').forEach(btn => {
-                btn.classList.remove('bg-purple-600');
-                btn.classList.add('bg-transparent');
-            });
-            document.getElementById(type + '-lb-btn').classList.remove('bg-transparent');
-            document.getElementById(type + '-lb-btn').classList.add('bg-purple-600');
         }
 
         function openLoginModal() {
@@ -760,20 +634,17 @@
         }
 
         function closeLoginModal() {
-            const email = document.getElementById('login-email').value.trim();
-            if (email) {
-                setPlayerName(email);
-                renderLeaderboard();
-            }
+            const name = document.getElementById('login-email').value.trim();
+            if (name) setPlayerName(name);
             document.getElementById('login-modal').classList.add('hidden');
         }
 
         function openCategory(category) {
-            const list = puzzles.filter(p => p.category === category);
+            const list = puzzles.filter(item => item.category === category);
             if (!list.length) return;
             let message = `Choose a ${category} puzzle:\n`;
             list.forEach((item, index) => {
-                message += `${index + 1}. ${item.question.slice(0, 60)}...\n`;
+                message += `${index + 1}. ${item.question.slice(0, 70)}...\n`;
             });
             message += '\nType the number you want to play.';
             const choice = parseInt(prompt(message), 10);
@@ -798,23 +669,27 @@
             clearInterval(challengeTimer);
         }
 
+        function getDailyChallenge() {
+            const today = getTodayKey();
+            const seed = today.split('-').join('').split('').reduce((total, ch) => total + ch.charCodeAt(0), 0);
+            return puzzles[seed % puzzles.length];
+        }
+
         function startChallenge() {
-            const puzzle = getDailyChallenge();
-            document.getElementById('daily-challenge-pill').textContent = `Daily challenge: ${puzzle.category.toUpperCase()} • ${puzzle.difficulty}`;
-            openPuzzleModal(puzzle);
+            const challenge = getDailyChallenge();
+            document.getElementById('daily-challenge-pill').textContent = `Daily challenge: ${challenge.category.toUpperCase()} • ${challenge.difficulty}`;
+            openPuzzleModal(challenge);
         }
 
         function submitChallenge() {
             const pid = document.getElementById('puzzle-modal').dataset.currentPuzzle;
             const puzzle = puzzles.find(item => item.id === pid);
-            const input = document.getElementById('challenge-answer').value.trim().toLowerCase();
+            const entered = document.getElementById('challenge-answer').value.trim().toLowerCase();
             const result = document.getElementById('challenge-result');
-
             if (!puzzle) return;
 
-            const correct = input === puzzle.answer.toLowerCase();
+            const correct = entered === puzzle.answer.toLowerCase();
             const progress = loadProgress();
-            progress.lastSeenDate = getTodayKey();
 
             if (correct) {
                 if (!progress.solved[puzzle.id]) {
@@ -822,7 +697,8 @@
                     progress.totalSolved = Object.keys(progress.solved).length;
                     progress.bestScore = (progress.bestScore || 0) + puzzle.points;
                 }
-                saveProgress(progress);
+                progress.lastSeenDate = getTodayKey();
+                saveProgress(updateStreak(progress));
                 renderProfile();
                 renderLeaderboard();
                 result.innerHTML = `🎉 Correct! You earned ${puzzle.points} points.`;
@@ -868,15 +744,22 @@
 
         function renderCategoryCounts() {
             const counts = { logic: 0, word: 0, math: 0, visual: 0 };
-            puzzles.forEach(puzzle => {
-                counts[puzzle.category] += 1;
-            });
+            puzzles.forEach(item => counts[item.category] += 1);
             document.getElementById('logic-count').textContent = counts.logic;
             document.getElementById('word-count').textContent = counts.word;
             document.getElementById('math-count').textContent = counts.math;
             document.getElementById('visual-count').textContent = counts.visual;
             document.getElementById('complete-count').textContent = puzzles.length;
             document.getElementById('total-puzzles').textContent = puzzles.length;
+        }
+
+        function switchLeaderboard(type) {
+            document.querySelectorAll('[id$="-lb-btn"]').forEach(btn => {
+                btn.classList.remove('bg-purple-600');
+                btn.classList.add('bg-transparent');
+            });
+            document.getElementById(type + '-lb-btn').classList.remove('bg-transparent');
+            document.getElementById(type + '-lb-btn').classList.add('bg-purple-600');
         }
 
         function scrollToSection(sectionId) {
@@ -886,9 +769,8 @@
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.scroll-reveal');
             reveals.forEach(item => {
-                const windowHeight = window.innerHeight;
                 const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < windowHeight - 150) item.classList.add('revealed');
+                if (itemTop < window.innerHeight - 150) item.classList.add('revealed');
             });
         }
 
@@ -912,26 +794,19 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const initial = loadProgress();
-            updateStreak(initial);
-            saveProgress(initial);
+            const progress = loadProgress();
+            const streakUpdated = updateStreak(progress);
+            saveProgress(streakUpdated);
 
-            const userInput = document.getElementById('login-email');
-            if (userInput) {
-                userInput.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter') {
-                        closeLoginModal();
-                    }
-                });
-            }
+            document.getElementById('login-email')?.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') closeLoginModal();
+            });
 
             document.getElementById('challenge-answer')?.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') submitChallenge();
             });
 
-            document.querySelectorAll('.feature-card, .puzzle-category, .leaderboard-item').forEach(el => {
-                el.classList.add('scroll-reveal');
-            });
+            document.querySelectorAll('.feature-card, .puzzle-category, .leaderboard-item').forEach(el => el.classList.add('scroll-reveal'));
 
             renderProfile();
             renderCategoryCounts();
